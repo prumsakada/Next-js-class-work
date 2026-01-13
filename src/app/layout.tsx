@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Moulpali } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
+import { h2 } from "motion/react-client";
+import LaodingCard from "@/components/LoadingCard";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const moulpali = Moulpali({
+  weight: '400',
+  variable: "--font-moulpali",
   subsets: ["latin"],
 });
 
@@ -25,9 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${moulpali.variable} antialiased`}
       >
+        <Suspense fallback={<LaodingCard/>
+        }>
         {children}
+        </Suspense>
       </body>
     </html>
   );
