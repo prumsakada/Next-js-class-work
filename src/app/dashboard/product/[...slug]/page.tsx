@@ -1,4 +1,4 @@
-export default async function Docs({
+export default async function Page({
     params,
 }: {
     params: Promise<{ slug: string[] }>;
@@ -20,3 +20,4 @@ export default async function Docs({
     }
     return <h1>Products Home page</h1>
 }
+

@@ -1,4 +1,4 @@
-export default async function Docs({
+export default async function Page({
     params,
 }: {
     params: Promise<{ slug: string[] }>;
