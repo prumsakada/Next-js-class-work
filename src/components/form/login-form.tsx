@@ -14,7 +14,13 @@ export default function LoginForm() {
 
     const formSchema = z.object({
         email: z.email("Please enter your email").nonempty(),
-        password: z.string().min(8, "at lest 8 characters").nonempty()
+        password: z.string()
+            .min(8, "at lest 8 characters")
+            .regex(/[a-z]/, "Must contain at least one lowercase letter")
+            .regex(/[A-Z]/, "Must contain at least one uppercase letter")
+            .regex(/[0-9]/, "Must contain at least one number")
+            .regex(/[^a-zA-Z0-9]/, "Must contain at least one special character")
+            .nonempty("Password is required")
     })
 
     const {
@@ -28,7 +34,7 @@ export default function LoginForm() {
 
     // const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => console.log(data)
     function loginSubmit(data) {
-        console.log('login check: ',data)
+        console.log('login check: ', data)
     }
     console.log(watch)
 
@@ -51,7 +57,7 @@ export default function LoginForm() {
                             <Input {...register("email")}
                                 id="email"
                                 type="email"
-                                placeholder="m@example.com"                       
+                                placeholder="m@example.com"
                             />
                             <p className="text-red-500">{errors.email?.message}</p>
                         </div>
@@ -67,7 +73,7 @@ export default function LoginForm() {
                             </div>
                             <Input {...register("password")}
                                 id="password" type="password" />
-                                <p className="text-red-500">{errors.password?.message}</p>
+                            <p className="text-red-500">{errors.password?.message}</p>
                         </div>
                     </div>
                     <Button type="submit" className="w-full">
