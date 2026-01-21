@@ -18,7 +18,7 @@ export default function Home() {
         <ArrowUpIcon />
       </Button>
       {/* <LaodingCard/> */}
-      <CardClientsList loadPost={loadPost()} />
+      {/* <CardClientsList loadPost={loadPost()} /> */}
     </div>
 
   );
