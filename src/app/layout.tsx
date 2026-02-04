@@ -4,6 +4,7 @@ import "./globals.css";
 import { Suspense } from "react";
 import { h2 } from "motion/react-client";
 import LaodingCard from "@/components/LoadingCard";
+import { Toaster } from "sonner";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -34,7 +35,9 @@ export default function RootLayout({
         <Suspense fallback={<LaodingCard/>
         }>
         {children}
+        <Toaster/>
         </Suspense>
+        
       </body>
     </html>
   );

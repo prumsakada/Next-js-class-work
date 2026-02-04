@@ -15,7 +15,8 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 export default function RegisterForm() {
 
     const formSchema = z.object({
-        email: z.email("Please enter your email").nonempty(),
+        email: z.email("Please enter your email")
+            .nonempty("Email is required"),
         password: z.string()
             .min(8, "Password must be at least 8 characters")
             .regex(/[a-z]/, "Must contain at least one lowercase letter")
@@ -29,14 +30,23 @@ export default function RegisterForm() {
         resolver: zodResolver(formSchema),
     })
 
+    // const {
+    //     register,
+    //     handleSubmit,
+    //     control,
+    //     watch,
+    //     formState: { errors },
+    // } = useForm<z.infer<typeof formSchema>>({
+    //     resolver: zodResolver(formSchema)
+    // })
+
     const {
         register,
         handleSubmit,
+        control,
         watch,
-        formState: { errors },
-    } = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema)
-    })
+        formState: { errors }
+    } = form
 
     // const onSubmit: SubmitHandler<z.infer<typeof formSchema>> = (data) => console.log(data)
     function loginSubmit(data) {
@@ -68,7 +78,7 @@ export default function RegisterForm() {
                                         <FormItem>
                                             <FormLabel>Email</FormLabel>
                                             <FormControl>
-                                                <Input placeholder="Email" {...field} />
+                                                <Input placeholder="email" {...field} />
                                             </FormControl>
                                             <FormDescription>
                                                 This is your public display email.
@@ -91,7 +101,7 @@ export default function RegisterForm() {
                                 </div>
                                 <Input {...register("password")}
                                     id="password" type="password" />
-                                <p className="text-red-500">{errors.password?.message}</p>
+                                {/* <p className="text-red-500">{errors.password?.message}</p> */}
                             </div>
                         </div>
                         <Button type="submit" className="w-full">
